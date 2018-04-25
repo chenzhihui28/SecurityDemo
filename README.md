@@ -3,21 +3,36 @@ ndk进行简单的签名校验，密钥保护
 # 使用Cmake进行NDK开发(应用签名校验、密钥保护、so文件适配相关)
 
 [NDK官方指南](https://developer.android.com/ndk/guides/concepts.html)
+
+
 [CMake官方文档](https://developer.android.com/ndk/guides/cmake.html)
+
+
 [CMake译文](https://www.zybuluo.com/khan-lau/note/254724)
+
+
 [Google官方samples](https://github.com/googlesamples/android-ndk)
+
+
 
 ## 从HelloWorld开始咯
 新建项目，勾选include c++ support
+<br>
+
 <img src="http://ww1.sinaimg.cn/large/64fe80f1gy1fqonkidf5wj21e011c789.jpg" width="500px"/>
+<br>
 
 建立完成之后，看看现在的项目文件结构
+<br>
 
 <img src="http://ww1.sinaimg.cn/large/64fe80f1gy1fqonno0dorj20qq13agq1.jpg" width="350px"/>
+<br>
  
  build.gradle
+ <br>
 
 <img src="http://ww1.sinaimg.cn/large/64fe80f1gy1fqopdwoa8fj21ca1aijzu.jpg" width ="500"/>
+<br>
 
 多了一个.externalNativeBuild文件夹
 main下多了个cpp文件夹
@@ -25,19 +40,23 @@ main下多了个cpp文件夹
 build.gradle文件多了两处externalNativeBuild块
 defaultConfig外面的那个externalNativeBuild块主要是指定CMakeLists.txt的文件路径
 defaultConfig里面的那个externalNativeBuild块主要填写CMake的命令参数。即由 arguments 中的参数最后转化成一个可执行的 CMake 的命令，可以在.externalNativeBuild/cmake/debug/{abi}/cmake_build_command.txt 中查到
+<br>
 
 来看看CMakeLists.txt
-
+<br>
 
 <img src="http://ww1.sinaimg.cn/large/64fe80f1gy1fqopw1wxrmj211a1iyaj8.jpg" width="500"/>
+<br>
 
 CMakeLists文件里面指出了需要编译的文件
+<br>
 
-
-默认已经帮我们生成了一个jni方法，返回一个helloworld字符串<br>
+默认已经帮我们生成了一个jni方法，返回一个helloworld字符串
+<br>
 <img src="http://ww1.sinaimg.cn/large/64fe80f1gy1fqonwbykunj20w60hudih.jpg" width="500px"/>
+<br>
 <img src="http://ww1.sinaimg.cn/large/64fe80f1gy1fqoo1mh2phj21540yc7ap.jpg" width="500px"/>
-
+<br>
 
 运行结果:
 
@@ -51,12 +70,17 @@ CMakeLists文件里面指出了需要编译的文件
 <img src="http://ww1.sinaimg.cn/large/64fe80f1gy1fqow77c2f7j20rq0he415.jpg" width=350/>
 
 <img src="http://ww1.sinaimg.cn/large/64fe80f1gy1fqow8ie1rpj20q40cu0un.jpg" width=350/>
+
 <img src="http://ww1.sinaimg.cn/large/64fe80f1gy1fqow93dzcaj20uo0i8mzk.jpg" width=350/>
 
 <img src="http://ww1.sinaimg.cn/large/64fe80f1gy1fqowe7ewqzj215q1hjtjm.jpg" width = 350/>
 
 运行效果:
+
+<br>
 <img src="http://ww1.sinaimg.cn/large/64fe80f1gy1fqow9hxximj20pi1ak40t.jpg" width = 350/>
+
+
 然后可以看到包名/build/intermediate/cmake目录下已经生成了so文件
 
 
@@ -228,7 +252,12 @@ Java_com_chenzhihui_demo_SecurityUtil_getSecret(
 
 
 换一个签名再运行或者改一下内置的签名串让它不相等：
+
+<br>
+
 <img src="http://ww1.sinaimg.cn/large/64fe80f1gy1fqp08vgfq9j20pi1akdwb.jpg" width=300/>
+
+<br>
 
 这样就完成了签名校验过程
 打个包会发现 包名/build/intermediate/cmake目录下已经生成了各个abi对应的so文件，当然也可以在gradle文件指定需要的abi
@@ -237,6 +266,7 @@ Java_com_chenzhihui_demo_SecurityUtil_getSecret(
 
 ## so文件相关
 不同 Android 手机使用不同的 CPU，因此支持不同的指令集。CPU 与指令集的每种组合都有其自己的应用二进制界面（或 ABI）。 ABI 可以非常精确地定义应用的机器代码在运行时如何与系统交互。 您必须为应用要使用的每个 CPU 架构指定 ABI。
+<br>
 [官网对abi的介绍](https://developer.android.com/ndk/guides/abis.html)
 
 
