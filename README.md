@@ -67,6 +67,8 @@ CMakeLists文件里面指出了需要编译的文件
 先专门弄一个类来生命native方法和加载so库，就叫SecurityUtil类吧
 放在包名的目录下（注意，定义native方法的时候，跟加载so库所在的类有关系，比如这里的SecurityUtil类，我放在com.a.b目录下，在这个类的静态代码块加载库，System.loadLibrary("native-lib");那么，定义native方法的格式就应该是Java_com_a_b_方法名,而当我放在com.a.b.c下，那native方法的格式就是Java_com_a_b_c_方法名，具体可以查一下jni方法的命名）
 在cpp文件夹新建一个security.cpp文件，改一下CMakeLists文件让他编译我们的cpp文件,新增一个getSecret方法,运行
+
+
 <img src="http://ww1.sinaimg.cn/large/64fe80f1gy1fqow77c2f7j20rq0he415.jpg" width=350/>
 
 <img src="http://ww1.sinaimg.cn/large/64fe80f1gy1fqow8ie1rpj20q40cu0un.jpg" width=350/>
